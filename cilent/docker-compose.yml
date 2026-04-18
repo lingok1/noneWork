@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  # 如果需要后端服务，可以取消注释
+  # backend:
+  #   image: node:18-alpine
+  #   working_dir: /app
+  #   command: npm run start
+  #   volumes:
+  #     - ./backend:/app
+  #   ports:
+  #     - "3000:3000"
+  #   restart: unless-stopped
+  #   networks:
+  #     - app-network
+
+networks:
+  app-network:
+    driver: bridge
